@@ -20,6 +20,6 @@ line 0 0 */4 \* \*  /path/to/the/main.py  -> runs at 00:00 every four days.
 
 ## Example-Output:
 
-[https://github.com/soultice/print-google-events/blob/master/printbuffer.png|alt=sample]
+![Image Example](./printbuffer.png?raw=true )
 
 
