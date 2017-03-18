@@ -3,8 +3,7 @@
 ## Installation:
 
 1. Clone this repository
-2. Create a google-calendar api:
-
+2. Create a google-calendar api:  
 [see the quickstart tutorial step 1](https://developers.google.com/google-apps/calendar/quickstart/python) 
 save the credentials.json in the projects root directory
 
