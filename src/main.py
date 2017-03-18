@@ -13,7 +13,7 @@ if __name__ == "__main__":
     url_login = 'https://accounts.google.com/ServiceLogin'
 
     task_session = Tasks.SessionGoogle(url_login, url_auth,
-            'florian.pfingstag@gmail.com', 'armageddon!')
+            'YOUR_EMAIL', 'YOURPASSWORD')
     task_session.get('http://keep.google.com/#reminders')
     task_session.get_page_text()
     task_session.parse_json()
@@ -28,4 +28,4 @@ if __name__ == "__main__":
     putter.put_all_text(events_text)
     putter.save_img('printbuffer.png')
     
-    printer.print_file('Muenchen_Haus', 'printbuffer.png')
+    printer.print_file('PRINTER', 'printbuffer.png')
