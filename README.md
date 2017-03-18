@@ -1,15 +1,14 @@
 # print-google-events
 
-# Installation:
+## Installation:
 
-## Clone this repository
-
-## Create a google-calendar api:
+1. Clone this repository
+2. Create a google-calendar api:
 
 [see the quickstart tutorial step 1](https://developers.google.com/google-apps/calendar/quickstart/python) 
 save the credentials.json in the projects root directory
 
-# Print your next 4-days schedule and Google Keep reminders:
+3. Print your next 4-days schedule and Google Keep reminders:
 
 in the 'main.py'
 
