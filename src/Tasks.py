@@ -38,23 +38,34 @@ class SessionGoogle:
     def parse_json(self):
         beg = self.text.rfind("JSON.parse(")+len("JSON.parse(")+1
         end = self.text.rfind("]")+1
+        print(beg,end)
         buf = self.text[beg:end]
         self.buf = buf
         notes = json.loads(buf)
         self.notedict = defaultdict(dict)
         for e in notes:
             if e['type'] == 'LIST':
-                self.notedict[e['id']] = {'title': e['title']
-                                          }
+                self.notedict[e['id']]['title'] = [e['title']]
             elif e['type'] == 'LIST_ITEM':
                 prt = self.notedict[e['parentId']].get('text')
-                if prt is None:
-                    prt = ''
-                self.notedict[e['parentId']]['text'] = e['text'] + ' \n ' \
-                    + prt
+                if prt is None or prt == '':
+                    print("new", e['text'])
+                    self.notedict[e['parentId']]['text'] = [e['text']]
+                    print(self.notedict[e['parentId']]['text'])
+                else:
+                    print("adding", e['text'])
+                    if e['text'] == "DummyListItem1":
+                        print(e['parentId'])
+                    self.notedict[e['parentId']]['text'].append(e['text'])
+                    print(self.notedict[e['parentId']]['text'])
             elif e['type'] == 'NOTE':
-                self.notedict[e['id']] = {'title': e['title'],
-                                          'text': e['text']}
+                prt = self.notedict[e['id']].get("text")
+                if prt is None:
+                    self.notedict[e['id']] = {'title': [e['title']],
+                                          'text': [e['text']]}
+                else:
+                    self.notedict[e['id']]['title'] = [e['title']]
+                    self.notedict[e['id']]['text'].append(e['text'])
             if e['reminders'] != []:
                 self.notedict[e['id']]['due'] = e['reminders'][0]['due']
 
@@ -65,8 +76,9 @@ class SessionGoogle:
                 dt = v['due']
                 date = str(dt['year']) + str(dt['month']) + str(dt['day'])
                 if v.get('text') is not None:
-                    reminders.append([date, [v['title']] + v.get('text').strip(' ').split('\n')])
+                    reminders.append([date, [v['title']] + [v.get('text')]])
                 else:
-                    reminders.append([date, [v['title']]])
+                    print("text empty")
+                    reminders.append([date, [v['title'], "no body"]])
         return reminders
 
