@@ -38,9 +38,7 @@ class SessionGoogle:
     def parse_json(self):
         beg = self.text.rfind("JSON.parse(")+len("JSON.parse(")+1
         end = self.text.rfind("]")+1
-        print(beg,end)
         buf = self.text[beg:end]
-        self.buf = buf
         notes = json.loads(buf)
         self.notedict = defaultdict(dict)
         for e in notes:
@@ -49,15 +47,10 @@ class SessionGoogle:
             elif e['type'] == 'LIST_ITEM':
                 prt = self.notedict[e['parentId']].get('text')
                 if prt is None or prt == '':
-                    print("new", e['text'])
                     self.notedict[e['parentId']]['text'] = [e['text']]
-                    print(self.notedict[e['parentId']]['text'])
                 else:
-                    print("adding", e['text'])
                     if e['text'] == "DummyListItem1":
-                        print(e['parentId'])
                     self.notedict[e['parentId']]['text'].append(e['text'])
-                    print(self.notedict[e['parentId']]['text'])
             elif e['type'] == 'NOTE':
                 prt = self.notedict[e['id']].get("text")
                 if prt is None:
