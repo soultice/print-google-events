@@ -3,6 +3,7 @@
 ## Installation:
 
 1. Clone this repository
+* Install requirements: e.g. 'pip install -r requirements.txt'
 2. Create a google-calendar api:  
 [see the quickstart tutorial step 1](https://developers.google.com/google-apps/calendar/quickstart/python) 
 save the credentials.json in the projects root directory
@@ -17,4 +18,9 @@ run main.py
 
 use e.g. [Cron](https://help.ubuntu.com/community/CronHowto) with the 
 line 0 0 */4 \* \*  /path/to/the/main.py  -> runs at 00:00 every four days.
+
+## Example-Output:
+
+![Image Example](./printbuffer.png?raw=true )
+
 
